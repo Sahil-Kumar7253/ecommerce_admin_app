@@ -1,6 +1,8 @@
 import 'package:ecommerce_admin_app/Views/admin_home.dart';
 import 'package:ecommerce_admin_app/Views/categoriesPage.dart';
 import 'package:ecommerce_admin_app/Views/login.dart';
+import 'package:ecommerce_admin_app/Views/modify_Product.dart';
+import 'package:ecommerce_admin_app/Views/products_page.dart';
 import 'package:ecommerce_admin_app/Views/signup_page.dart';
 import 'package:ecommerce_admin_app/controllers/auth_service.dart';
 import 'package:ecommerce_admin_app/firebase_options.dart';
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
               '/adminhome': (context) => const AdminHome(),
               '/signup': (context) => const SignUpPage(),
               '/category': (context) => const Categoriespage(),
+              '/products': (context) => const ProductsPage(),
+              '/modifyproduct': (context) => const ModifyProduct(),
             },
           ),
     );

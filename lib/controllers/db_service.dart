@@ -31,4 +31,36 @@ class DbService {
         .doc(id)
         .delete();
   }
+
+  // Products
+  Stream<QuerySnapshot> readProducts() {
+    return FirebaseFirestore.instance
+        .collection('shop_products')
+        .orderBy("priority", descending: true)
+        .snapshots();
+  }
+
+  // get products
+  Future createProducts({required Map<String, dynamic> data}) async {
+    await FirebaseFirestore.instance.collection('shop_products').add(data);
+  }
+
+  // update products
+  Future updateProducts({
+    required String id,
+    required Map<String, dynamic> data,
+  }) async {
+    await FirebaseFirestore.instance
+        .collection('shop_products')
+        .doc(id)
+        .update(data);
+  }
+
+  // delete products
+  Future deleteProducts({required String id}) async {
+    await FirebaseFirestore.instance
+        .collection('shop_products')
+        .doc(id)
+        .delete();
+  }
 }

@@ -8,10 +8,15 @@ class Adminprovider extends ChangeNotifier {
   List<QueryDocumentSnapshot> categories = [];
   StreamSubscription<QuerySnapshot>? _categorysubscription;
 
+  List<QueryDocumentSnapshot> products = [];
+  StreamSubscription<QuerySnapshot>? _productsubscription;
+
   int totalCategories = 0;
+  int totalProducts = 0;
 
   Adminprovider() {
     getCategories();
+    getProducts();
   }
 
   void getCategories() {
@@ -20,6 +25,21 @@ class Adminprovider extends ChangeNotifier {
     _categorysubscription = DbService().readCategories().listen((snapshot) {
       categories = snapshot.docs;
       totalCategories = categories.length;
+      notifyListeners();
+    });
+  }
+
+  // get products List
+  void getProducts() {
+    _productsubscription?.cancel();
+
+    _productsubscription = DbService().readProducts().listen((snapshot) {
+      for (var doc in snapshot.docs) {
+        print("Product ID: ${doc.id}, Data: ${doc.data()}");
+      }
+
+      products = snapshot.docs;
+      totalProducts = products.length;
       notifyListeners();
     });
   }

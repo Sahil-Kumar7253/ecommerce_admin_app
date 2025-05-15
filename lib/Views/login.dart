@@ -108,6 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                                 actions: [
                                   TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text("Cancel"),
+                                  ),
+                                  TextButton(
                                     onPressed: () async {
                                       if (emailController.text.isEmpty) {
                                         ScaffoldMessenger.of(
@@ -198,13 +204,13 @@ class _LoginPageState extends State<LoginPage> {
                                 });
                           }
                         },
-                        child: Text("Login"),
                         style: ElevatedButton.styleFrom(
                           padding: EdgeInsets.symmetric(vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
+                        child: Text("Login"),
                       ),
                     ),
                     SizedBox(height: 20),

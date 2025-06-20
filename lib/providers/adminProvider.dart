@@ -34,10 +34,10 @@ class Adminprovider extends ChangeNotifier {
     _productsubscription?.cancel();
 
     _productsubscription = DbService().readProducts().listen((snapshot) {
+      print("Hello");
       for (var doc in snapshot.docs) {
         print("Product ID: ${doc.id}, Data: ${doc.data()}");
       }
-
       products = snapshot.docs;
       totalProducts = products.length;
       notifyListeners();

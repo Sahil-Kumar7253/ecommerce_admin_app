@@ -212,7 +212,7 @@ class _ModifyProductState extends State<ModifyProduct> {
                         }
                       }
                     },
-                    child: Text('Add Product'),
+                    child: Text(productId.isNotEmpty? "Update Product" : 'Add Product'),
                   ),
                 ],
               ),

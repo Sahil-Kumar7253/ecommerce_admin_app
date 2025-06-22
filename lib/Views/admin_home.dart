@@ -87,8 +87,12 @@ class _AdminHomeState extends State<AdminHome> {
             ),
             Row(
               children: [
-                HomeButton(onTap: () {}, name: "Promos"),
-                HomeButton(onTap: () {}, name: "Banners"),
+                HomeButton(onTap: () {
+                  Navigator.pushNamed(context, "/promobanners",arguments: {"promo":true});
+                }, name: "Promos"),
+                HomeButton(onTap: () {
+                  Navigator.pushNamed(context, "/promobanners",arguments: {"promo":false});
+                }, name: "Banners"),
               ],
             ),
             Row(

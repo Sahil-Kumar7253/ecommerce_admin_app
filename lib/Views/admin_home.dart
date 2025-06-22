@@ -103,7 +103,9 @@ class _AdminHomeState extends State<AdminHome> {
                   },
                   name: "Categories",
                 ),
-                HomeButton(onTap: () {}, name: "Coupons"),
+                HomeButton(onTap: () {
+                  Navigator.pushNamed(context, "/coupons");
+                }, name: "Coupons"),
               ],
             ),
           ],

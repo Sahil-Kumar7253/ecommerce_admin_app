@@ -88,4 +88,28 @@ class DbService {
     await FirebaseFirestore.instance.collection(isPromo ? 'shop_promos' : 'shop_banners').doc(id).delete();
   }
 
+
+  //Coupons
+
+  //read Coupon Codes
+  Stream<QuerySnapshot> readCouponCodes() {
+    return FirebaseFirestore.instance
+        .collection('shop_coupon')
+        .snapshots();
+  }
+
+  //create Coupon Codes
+  Future createCouponCodes({required Map<String,dynamic> data}) async {
+    await FirebaseFirestore.instance.collection('shop_coupon').add(data);
+  }
+
+  //update Coupon Codes
+  Future updateCouponCodes({required String id,required Map<String,dynamic> data}) async {
+    await FirebaseFirestore.instance.collection('shop_coupon').doc(id).update(data);
+  }
+
+  //delete Coupon Codes
+  Future deleteCouponCodes({required String id}) async {
+    await FirebaseFirestore.instance.collection('shop_coupon').doc(id).delete();
+  }
 }

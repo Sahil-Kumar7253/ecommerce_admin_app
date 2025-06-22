@@ -2,6 +2,8 @@ import 'package:ecommerce_admin_app/controllers/db_service.dart';
 import 'package:ecommerce_admin_app/models/PromoModel.dart';
 import 'package:flutter/material.dart';
 
+import '../Container/additionalConfirm.dart';
+
 class Promobanners extends StatefulWidget {
   const Promobanners({super.key});
 
@@ -48,12 +50,32 @@ class _PromobannersState extends State<Promobanners> {
                    itemCount: promos.length,
                    itemBuilder: (context, index) {
                      return ListTile(
-                       onLongPress: (){
+                         onTap: (){
+                           showDialog(context: context, builder: (context) => AlertDialog(
+                             title: Text("Choose What you want to delete"),
+                             content: Text("Delete Cannot be undone"),
+                             actions: [
+                               TextButton(onPressed: (){
+                                 showDialog(context: context, builder: (context) =>
+                                     Additionalconfirm(
+                                         contentText: "Are You Suer you want to Delete the Product",
+                                         onNo: (){
+                                           Navigator.pop(context);
+                                         },
+                                         onYes: (){
+                                           DbService().deletePromos(id: promos[index].Id, isPromo: _isPromo);
+                                           Navigator.pop(context);
+                                           Navigator.pop(context);
+                                         })
+                                 );
 
-                       },
-                       onTap: (){
+                               }, child: Text("Delete ${_isPromo? "Promo" : "Banner"}")),
+                               TextButton(onPressed: (){
+                               }, child: Text("Update ${_isPromo? "Promo" : "Banner"}"))
+                             ],
+                           ));
+                         },
 
-                       },
                        leading: Container(
                          height: 50,
                          width: 50,

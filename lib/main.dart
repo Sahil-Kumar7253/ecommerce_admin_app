@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'Views/Coupons.dart';
 import 'Views/ModifyPromoBanner.dart';
 import 'Views/PromoBanners.dart';
 import 'Views/view_product.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
               '/viewproduct': (context) => const ViewProduct(),
               '/promobanners': (context) => const Promobanners(),
               '/modifypromo': (context) => const ModifyPromo(),
+              '/coupons': (context) => const Coupons(),
             },
           ),
     );

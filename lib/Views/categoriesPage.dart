@@ -32,12 +32,11 @@ class _CategoriespageState extends State<Categoriespage> {
             itemCount: value.categories.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: Container(
+                leading: SizedBox(
                   height: 50,
                   width: 50,
                   child: Image.network(
-                    categories[index].image == null ||
-                            categories[index].image == ""
+                    categories[index].image == ""
                         ? "https://demofree.sirv.com/nope-not-there.jpg"
                         : categories[index].image,
                   ),
@@ -171,7 +170,7 @@ class ModifyCategory extends StatefulWidget {
 class _ModifyCategoryState extends State<ModifyCategory> {
   final formkey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
-  late XFile? image = null;
+  XFile? image;
   TextEditingController categoryController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   TextEditingController priorityController = TextEditingController();

@@ -1,6 +1,5 @@
 import 'package:ecommerce_admin_app/controllers/db_service.dart';
 import 'package:ecommerce_admin_app/models/PromoModel.dart';
-import 'package:ecommerce_admin_app/models/productsModel.dart';
 import 'package:ecommerce_admin_app/providers/adminProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,16 +31,12 @@ class _ModifyPromoState extends State<ModifyPromo> {
   bool _isPromo = true;
   String text = "";
 
-
   @override
-  void initState(){
+  void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if(!_isInitialized) {
-        final arguments = ModalRoute
-            .of(context)
-            ?.settings
-            .arguments;
+      if (!_isInitialized) {
+        final arguments = ModalRoute.of(context)?.settings.arguments;
         if (arguments != null && arguments is Map<String, dynamic>) {
           if (arguments['detail'] is PromoBannersModel) {
             setData(arguments['detail']);
@@ -58,18 +53,14 @@ class _ModifyPromoState extends State<ModifyPromo> {
   String _screenTitle() {
     final isNew = promoId.isEmpty;
     return _isPromo
-        ? (isNew ? 'Add Promo'    : 'Update Promo')
-        : (isNew ? 'Add Banner'   : 'Update Banner');
+        ? (isNew ? 'Add Promo' : 'Update Promo')
+        : (isNew ? 'Add Banner' : 'Update Banner');
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_screenTitle()),
-
-      ),
+      appBar: AppBar(title: Text(_screenTitle())),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -80,7 +71,8 @@ class _ModifyPromoState extends State<ModifyPromo> {
                 children: [
                   TextFormField(
                     controller: titleController,
-                    validator: (v) => v!.isEmpty ? "This Cannot be Empty" : null,
+                    validator:
+                        (v) => v!.isEmpty ? "This Cannot be Empty" : null,
                     decoration: InputDecoration(
                       hintText: 'Title',
                       label: Text('Title'),
@@ -104,44 +96,44 @@ class _ModifyPromoState extends State<ModifyPromo> {
                         context: context,
                         builder:
                             (context) => AlertDialog(
-                          title: Text("Select Category : "),
-                          content: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              SizedBox(height: 10),
-                              Consumer<Adminprovider>(
-                                builder:
-                                    (context, value, child) =>
-                                    SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children:
-                                        value.categories
-                                            .map(
-                                              (e) => TextButton(
-                                            onPressed: () {
-                                              categoryController
-                                                  .text =
-                                              e["name"];
-                                              setState(() {});
-                                              Navigator.pop(
-                                                context,
-                                              );
-                                            },
-                                            child: Text(
-                                              e["name"],
+                              title: Text("Select Category : "),
+                              content: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  SizedBox(height: 10),
+                                  Consumer<Adminprovider>(
+                                    builder:
+                                        (context, value, child) =>
+                                            SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children:
+                                                    value.categories
+                                                        .map(
+                                                          (e) => TextButton(
+                                                            onPressed: () {
+                                                              categoryController
+                                                                      .text =
+                                                                  e["name"];
+                                                              setState(() {});
+                                                              Navigator.pop(
+                                                                context,
+                                                              );
+                                                            },
+                                                            child: Text(
+                                                              e["name"],
+                                                            ),
+                                                          ),
+                                                        )
+                                                        .toList(),
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                            .toList(),
-                                      ),
-                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
                       );
                     },
                   ),
@@ -170,17 +162,28 @@ class _ModifyPromoState extends State<ModifyPromo> {
                           await DbService().updatePromos(
                             id: promoId,
                             data: data,
-                            isPromo: _isPromo
+                            isPromo: _isPromo,
                           );
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("${_isPromo? "Promo" : "Banner"} Updated")),
+                            SnackBar(
+                              content: Text(
+                                "${_isPromo ? "Promo" : "Banner"} Updated",
+                              ),
+                            ),
                           );
                         } else {
-                          await DbService().createPromos(data: data, isPromo: _isPromo);
+                          await DbService().createPromos(
+                            data: data,
+                            isPromo: _isPromo,
+                          );
                           Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text("${_isPromo? "Promo" : "Banner"} Added")),
+                            SnackBar(
+                              content: Text(
+                                "${_isPromo ? "Promo" : "Banner"} Added",
+                              ),
+                            ),
                           );
                         }
                       }

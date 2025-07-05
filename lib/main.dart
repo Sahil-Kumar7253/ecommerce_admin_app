@@ -2,6 +2,7 @@ import 'package:ecommerce_admin_app/Views/admin_home.dart';
 import 'package:ecommerce_admin_app/Views/categoriesPage.dart';
 import 'package:ecommerce_admin_app/Views/login.dart';
 import 'package:ecommerce_admin_app/Views/modify_Product.dart';
+import 'package:ecommerce_admin_app/Views/orders_page.dart';
 import 'package:ecommerce_admin_app/Views/products_page.dart';
 import 'package:ecommerce_admin_app/Views/signup_page.dart';
 import 'package:ecommerce_admin_app/controllers/auth_service.dart';
@@ -14,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'Views/Coupons.dart';
 import 'Views/ModifyPromoBanner.dart';
 import 'Views/PromoBanners.dart';
+import 'Views/view_Order.dart';
 import 'Views/view_product.dart';
 
 void main() async {
@@ -25,7 +27,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
               '/promobanners': (context) => const Promobanners(),
               '/modifypromo': (context) => const ModifyPromo(),
               '/coupons': (context) => const Coupons(),
+              '/orders' : (context) => const OrdersPage(),
+              '/view_order' : (context) => const ViewOrder(),
             },
           ),
     );

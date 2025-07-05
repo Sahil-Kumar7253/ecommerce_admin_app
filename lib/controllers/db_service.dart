@@ -112,4 +112,20 @@ class DbService {
   Future deleteCouponCodes({required String id}) async {
     await FirebaseFirestore.instance.collection('shop_coupon').doc(id).delete();
   }
+
+  //readOrder
+  Stream<QuerySnapshot> readOrders(){
+    return FirebaseFirestore.instance
+        .collection("shop_orders")
+        .orderBy("created_at", descending: true)
+        .snapshots();
+  }
+
+  //update the status of the order
+  Future updateOrderStatus({required String docId, required Map<String, dynamic> data}) async {
+    await FirebaseFirestore.instance
+        .collection("shop_orders")
+        .doc(docId)
+        .update(data);
+  }
 }

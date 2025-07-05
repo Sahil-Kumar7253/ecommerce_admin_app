@@ -13,69 +13,86 @@ class ViewProduct extends StatefulWidget {
 class _ViewProductState extends State<ViewProduct> {
   @override
   Widget build(BuildContext context) {
-    final argumnets = ModalRoute.of(context)!.settings.arguments as Productsmodel;
+    final argumnets =
+        ModalRoute.of(context)!.settings.arguments as Productsmodel;
     return Scaffold(
       appBar: AppBar(title: Text("User's View")),
       body: SingleChildScrollView(
         child: Column(
           children: [
-               Image.network(argumnets.image,height : 300, width: double.infinity,fit: BoxFit.contain),
-               Padding(
-                 padding: const EdgeInsets.all(8.0),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     SizedBox(height: 20,),
-                     Text(argumnets.name,maxLines: 2,overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                     SizedBox(height: 10,),
-                     Row(
-                       children: [
-                         Text("Rs ${argumnets.old_Price.toString()}",
-                           style: TextStyle(
-                               fontSize:18,
-                               fontWeight: FontWeight.w500,
-                               decoration: TextDecoration.lineThrough
-                           ),
-                         ),
-                         SizedBox(width: 10),
-                         Text("Rs ${argumnets.new_Price.toString()}",
-                           style: TextStyle(
-                               fontSize:20,
-                               fontWeight: FontWeight.bold
-                           )
-                         ),
-                         SizedBox(width: 10),
-                         Icon(Icons.arrow_downward,color: Colors.green,size: 20),
-                         SizedBox(width: 5),
-                         Text("${discountPercent(argumnets.old_Price,argumnets.new_Price)}%",
-                           style: TextStyle(
-                               fontSize:18,
-                               fontWeight: FontWeight.w500,
-                               color: Colors.green
-                           )
-                         ),
-                       ]
-                     ),
-                     SizedBox(height: 10),
-                     argumnets.maxQuantity == 0? Text("Out of Stock",
-                       style: TextStyle(
-                           fontSize: 15,
-                           fontWeight: FontWeight.w500,
-                           color: Colors.red
-                       ),
-                     ) :
-                     Text("only ${argumnets.maxQuantity} left",
-                       style: TextStyle(
-                           fontSize: 20,
-                           fontWeight: FontWeight.w500,
-                           color: Colors.green
-                       ),
-                     ),
-                     SizedBox(height: 10),
-                     Text(argumnets.description)
-                   ],
-                 ),
-               )
+            Image.network(
+              argumnets.image,
+              height: 300,
+              width: double.infinity,
+              fit: BoxFit.contain,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 20),
+                  Text(
+                    argumnets.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Text(
+                        "Rs ${argumnets.old_Price.toString()}",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        "Rs ${argumnets.new_Price.toString()}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Icon(Icons.arrow_downward, color: Colors.green, size: 20),
+                      SizedBox(width: 5),
+                      Text(
+                        "${discountPercent(argumnets.old_Price, argumnets.new_Price)}%",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  argumnets.maxQuantity == 0
+                      ? Text(
+                        "Out of Stock",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.red,
+                        ),
+                      )
+                      : Text(
+                        "only ${argumnets.maxQuantity} left",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.green,
+                        ),
+                      ),
+                  SizedBox(height: 10),
+                  Text(argumnets.description),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -83,30 +100,30 @@ class _ViewProductState extends State<ViewProduct> {
         children: [
           SizedBox(
             height: 60,
-            width: MediaQuery.of(context).size.width*.5,
+            width: MediaQuery.of(context).size.width * .5,
             child: ElevatedButton(
-              onPressed: (){},
-              child: Text("Add To Cart"),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder()
+                shape: RoundedRectangleBorder(),
               ),
+              child: Text("Add To Cart"),
             ),
           ),
           SizedBox(
             height: 60,
-            width: MediaQuery.of(context).size.width*.5,
+            width: MediaQuery.of(context).size.width * .5,
             child: ElevatedButton(
-              onPressed: (){},
-              child: Text("Buy Now"),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder()
+                foregroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(),
               ),
+              child: Text("Buy Now"),
             ),
-          )
+          ),
         ],
       ),
     );

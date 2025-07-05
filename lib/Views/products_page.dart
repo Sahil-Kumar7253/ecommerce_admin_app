@@ -30,34 +30,55 @@ class _ProductsPageState extends State<ProductsPage> {
             itemCount: value.products.length,
             itemBuilder: (context, index) {
               return ListTile(
-                onTap: (){
-                  Navigator.pushNamed(context, "/viewproduct",arguments: products[index]);
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    "/viewproduct",
+                    arguments: products[index],
+                  );
                 },
-                onLongPress: (){
-                  showDialog(context: context, builder: (context) => AlertDialog(
-                    title: Text("Choose What you want to delete"),
-                    content: Text("Delete Cannot be undone"),
-                    actions: [
-                      TextButton(onPressed: (){
-                        showDialog(context: context, builder: (context) =>
-                         Additionalconfirm(
-                             contentText: "Are You Suer you want to Delete the Product",
-                             onNo: (){
-                               Navigator.pop(context);
-                             },
-                             onYes: (){
-                               DbService().deleteProducts(id: products[index].id);
-                               Navigator.pop(context);
-                               Navigator.pop(context);
-                             })
-                        );
-
-                      }, child: Text("Delete Product")),
-                      TextButton(onPressed: (){}, child: Text("Edit Product"))
-                    ],
-                  ));
+                onLongPress: () {
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => AlertDialog(
+                          title: Text("Choose What you want to delete"),
+                          content: Text("Delete Cannot be undone"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder:
+                                      (context) => Additionalconfirm(
+                                        contentText:
+                                            "Are You Suer you want to Delete the Product",
+                                        onNo: () {
+                                          Navigator.pop(context);
+                                        },
+                                        onYes: () {
+                                          DbService().deleteProducts(
+                                            id: products[index].id,
+                                          );
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                );
+                              },
+                              child: Text("Delete Product"),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text("Edit Product"),
+                            ),
+                          ],
+                        ),
+                  );
                 },
-                leading: Container(height: 50,width: 50,
+                leading: SizedBox(
+                  height: 50,
+                  width: 50,
                   child: Image.network(products[index].image),
                 ),
                 title: Text(
@@ -69,14 +90,26 @@ class _ProductsPageState extends State<ProductsPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Rs ${products[index].new_Price.toString()}"),
-                    Container(padding : EdgeInsets.all(4),
-                    color: Colors.green
-                    ,child: Text(products[index].category.toUpperCase(),style: TextStyle(color: Colors.white),))
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      color: Colors.green,
+                      child: Text(
+                        products[index].category.toUpperCase(),
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ],
                 ),
-                trailing: IconButton(onPressed:(){
-                  Navigator.pushNamed(context, "/modifyproduct",arguments: products[index]);
-                }, icon: Icon(Icons.edit_outlined)),
+                trailing: IconButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      "/modifyproduct",
+                      arguments: products[index],
+                    );
+                  },
+                  icon: Icon(Icons.edit_outlined),
+                ),
               );
             },
           );

@@ -17,9 +17,9 @@ class _HomeButtonState extends State<HomeButton> {
       child: Container(
         height: 65,
         width: MediaQuery.of(context).size.width * .42,
-        margin: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
           boxShadow: const [
             BoxShadow(

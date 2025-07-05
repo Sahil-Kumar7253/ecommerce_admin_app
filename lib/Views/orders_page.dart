@@ -1,4 +1,6 @@
+import 'package:ecommerce_admin_app/providers/adminProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../controllers/db_service.dart';
 import '../models/order_model.dart';
@@ -49,11 +51,10 @@ class _OrdersPageState extends State<OrdersPage> {
         title: const Text("Orders"),
         centerTitle: true,
       ),
-      body: StreamBuilder(
-          stream: DbService().readOrders(),
-          builder: (context,snapshot){
-            if(snapshot.hasData){
-              List<OrderModel> orders = OrderModel.fromJsonList(snapshot.data!.docs);
+      body: Consumer<Adminprovider>(
+          builder: (context,snapshot,child){
+            List<OrderModel> orders = OrderModel.fromJsonList(snapshot.orders);
+
               if(orders.isEmpty){
                 return const Center(child: Text("No Orders Found"));
               }else{
@@ -81,9 +82,6 @@ class _OrdersPageState extends State<OrdersPage> {
                   },
                 );
               }
-            }else{
-              return const Center(child: CircularProgressIndicator());
-            }
           }
       ),
     );
